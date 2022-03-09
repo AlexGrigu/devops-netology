@@ -160,8 +160,8 @@ $ crontab -l
 ```
 Первый сертификат, выпущенный в 20:10
 
-https://user-images.githubusercontent.com/93088132/157435340-c30b191e-8901-4992-bcd9-c98e82d51ffe.png
+![alt text](https://user-images.githubusercontent.com/93088132/157435340-c30b191e-8901-4992-bcd9-c98e82d51ffe.png)
 
 Второй сертификат, выпущенный в 20:12
 
-https://user-images.githubusercontent.com/93088132/157435348-21338ae5-a49c-4779-9b6d-be31b07b2905.png
+![alt tag](https://user-images.githubusercontent.com/93088132/157435348-21338ae5-a49c-4779-9b6d-be31b07b2905.png)
