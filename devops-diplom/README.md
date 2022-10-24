@@ -100,9 +100,11 @@ ansible-playbook -i inventory roles/gitlab/tasks/main.yml
 gitlab-runner register
 ...
 ```
-![]()
-![]()
-![]()
+![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Runner-reg.JPG)
+Тестовый deploy прошел
+![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Gitlab_job_test.JPG)
+К сожалению, так и не удалось отправить изменения на сайт
+![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Gitlab_job_failed.JPG)
 ___
 ### Установка Prometheus, Alert Manager, Node Exporter и Grafana
 ```yaml
