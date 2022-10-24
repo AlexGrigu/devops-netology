@@ -33,6 +33,7 @@ ___
 - Настроен хостинг DNS в YandexCloud ns1.yandexcloud.net и ns2.yandexcloud.net
 ```
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/nicru.JPG)
+
 Создан S3 bucket в YC
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Bucket.JPG)
 ### Создание инфраструктуры
@@ -47,6 +48,7 @@ ___
 - `key.json`     Ключ для подключения к YC.
 
 Хост с NAT развернут на базе NAT-инстанса - https://cloud.yandex.ru/docs/tutorials/routing/nat-instance
+
 Остальные хосты на базе образа ubuntu 20.04 LTS
 
 Развернута инфраструктура с помощью terraform в директории с файлами *.tf:
@@ -58,7 +60,9 @@ terraform plan
 terraform apply -auto-approve
 ```
 После применения terraform apply забираем из output данные для ssh-подключения к хостам и записываем в `~/.ssh/config`
+
 Также добавляем IP-адреса серверов в `variables.yml`
+
 И добавляем IP-адреса в конфигурацию [Prometheus](https://github.com/AlexGrigu/devops-netology/blob/main/devops-diplom/ansible/roles/monitoring/stack/prometheus/prometheus.yml)
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Main_yc.JPG)
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/DNS.JPG)
@@ -69,8 +73,8 @@ ___
 Все роли находятся в директории /ansible/roles
 
 Также в корне ansible присутствуют:
-ansible.cfg - указан путь к inventory-файлу и добавлена переменная для запуска ролей
-inventory - описание хостов
+- ansible.cfg - указан путь к inventory-файлу и добавлена переменная для запуска ролей
+- inventory - описание хостов
 ### Установка Nginx и LetsEncrypt
 ```yaml
 ansible-playbook -i inventory roles/main/tasks/main.yml
@@ -91,6 +95,7 @@ ansible-playbook -i inventory roles/app/tasks/main.yml
 ---
 ### Установка Gitlab CE и Gitlab Runner
 Установка двух хостов производилась из одной роли
+
 За основу был взят образ gitlab:
 - gitlab - https://github.com/sameersbn/docker-gitlab
 - gitlab-runner - устанавливался из оригинального скрипта https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh
@@ -101,8 +106,16 @@ gitlab-runner register
 ...
 ```
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Runner-reg.JPG)
+
 Тестовый deploy прошел
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Gitlab_job_test.JPG)
+```shell
+Создаем локальный репозиторий
+$ git init
+$ git remote add origin https://gitlab.alexgrigu.ru/gitlab-instance-6692d91b/wordpress.git
+
+После выполнения git push файлы попалают в job
+```
 К сожалению, так и не удалось отправить изменения на сайт
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Gitlab_job_failed.JPG)
 ___
@@ -112,7 +125,9 @@ ansible-playbook -i inventory roles/monitoring/tasks/main.yml
 ```
 Alertmanager
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Alertmanager.JPG)
+
 Grafana
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Grafana.JPG)
+
 Prometheus
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Prometheus.JPG)
