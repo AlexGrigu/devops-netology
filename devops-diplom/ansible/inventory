@@ -1,0 +1,22 @@
+[main]
+main.alexgrigu.ru
+
+[gitlab]
+gitlab.alexgrigu.ru
+
+[runner]
+runner.alexgrigu.ru
+
+[db01]
+db01.alexgrigu.ru
+
+[db02]
+db02.alexgrigu.ru
+
+[wordpress]
+app.alexgrigu.ru
+
+[monitoring]
+monitoring.alexgrigu.ru
+
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
