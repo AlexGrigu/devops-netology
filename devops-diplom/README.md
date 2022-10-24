@@ -114,7 +114,7 @@ gitlab-runner register
 $ git init
 $ git remote add origin https://gitlab.alexgrigu.ru/gitlab-instance-6692d91b/wordpress.git
 
-После выполнения git push файлы попалают в job
+После выполнения git push файлы попадают в job
 ```
 К сожалению, так и не удалось отправить изменения на сайт
 ![](https://raw.githubusercontent.com/AlexGrigu/devops-netology/main/devops-diplom/img/Gitlab_job_failed.JPG)
