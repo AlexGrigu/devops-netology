@@ -1,12 +1,23 @@
 ---
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$ssh_key" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
 stages:
+  - test
   - deploy
 
+test:
+  stage: test
+  script: echo $CI_PROJECT_DIR/
 deploy-job:
   stage: deploy
   script:
-    - eval "$(ssh-agent -s)" > /dev/null 2>&1
-    - ssh-add <(echo "$SSH_PRIVATE_KEY") > /dev/null 2>&1
-    - mkdir -p ~/.ssh && echo -e "Host *\n\tStrictHostKeyChecking no\n\tLogLevel=quiet\n\n" >> ~/.ssh/config
-    - rsync --itemize-changes --verbose --human-readable --times --checksum --recursive --delete --exclude-from=/etc/rsyncignore --delete-excluded . ssh://alexxas@app.alexgrigu.ru::/var/www/wordpress/
-    - rc=$?; if [[ $rc != 0 ]]; then echo "rsync failed with $rc"; exit 1; fi
+    - echo "Deploying application..."
+    - ssh -o StrictHostKeyChecking=no alexxas@app.alexgrigu.ru sudo chown alexxas /var/www/wordpress/ -R
+    - rsync -rvz -e "ssh -o StrictHostKeyChecking=no" ./* alexxas@app.alexgrigu.ru:/var/www/wordpress/
+    - ssh -o StrictHostKeyChecking=no alexxas@app.alexgrigu.ru rm -rf /var/www/wordpress/.git
+    - ssh -o StrictHostKeyChecking=no alexxas@app.alexgrigu.ru sudo chown www-data /var/www/wordpress/ -R
